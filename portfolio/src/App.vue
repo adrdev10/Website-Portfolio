@@ -7,31 +7,40 @@
       </p>
       <p id="title-about">I am a software Developer who loves good software designs.</p>
     </div>
-    <div>
-      <button></button>
+    <div id="title-bottom-container">
+      <button id="title-start-button"></button>
     </div>
   </div>
 </template>
 
 <script>
+import ProjectBox from "./components/ProjectBox.vue";
+import ContactBox from "./components/ContactBox";
 
 export default {
   data() {
     return {
       names: ["Software Developer", "Creator", "Me"],
       counter: 0,
-      currentCounter: 0,
+      currentName: ""
     };
   },
-  created() {
-    setInterval(function() {
-        this.currentName= this.names[this.counter % (this.names.length-1)];
+
+  created: function() {
+    setInterval(
+      function() {
+        let newName = this.names[this.counter % this.names.length];
         this.counter++;
-      }.bind(this), 20000);
+        this.currentName = newName;
+      }.bind(this),
+      3000
+    );
   },
 
   name: "app",
   components: {
+    ProjectBox,
+    SendMessage,
   }
 };
 </script>
@@ -69,5 +78,21 @@ p {
 
 #title-about {
   font-size: 100%;
+}
+
+#title-start-button {
+  background: url("assets/power.png") no-repeat;
+  border: none;
+  width: 70px;
+  height: 80px;
+  top: 180%;
+  margin: 0 auto;
+}
+
+#title-bottom-container {
+  font-size: 1px;
+  top: 50%;
+  bottom: 30%;
+  position: relative;
 }
 </style>
