@@ -1,46 +1,20 @@
 <template>
   <div id="app">
-    <div id="main-content">
-      <p id="title-name">
-        Adrian Silva
-        <b-badge>{{currentName}}</b-badge>
-      </p>
-      <p id="title-about">I am a software Developer who loves good software designs.</p>
-    </div>
-    <div id="title-bottom-container">
-      <button id="title-start-button"></button>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import ProjectBox from "./components/ProjectBox.vue";
 import ContactBox from "./components/ContactBox";
-
 export default {
   data() {
-    return {
-      names: ["Software Developer", "Creator", "Me"],
-      counter: 0,
-      currentName: ""
-    };
+    return {};
   },
-
-  created: function() {
-    setInterval(
-      function() {
-        let newName = this.names[this.counter % this.names.length];
-        this.counter++;
-        this.currentName = newName;
-      }.bind(this),
-      3000
-    );
-  },
-
   name: "app",
   components: {
     ProjectBox,
-    SendMessage,
+    ContactBox
   }
 };
 </script>
@@ -65,34 +39,5 @@ body {
   color: #fff;
 }
 
-p {
-  font-size: 400%;
-  margin: 0 auto;
-}
 
-#main-content {
-  top: 40%;
-  bottom: 50%;
-  position: relative;
-}
-
-#title-about {
-  font-size: 100%;
-}
-
-#title-start-button {
-  background: url("assets/power.png") no-repeat;
-  border: none;
-  width: 70px;
-  height: 80px;
-  top: 180%;
-  margin: 0 auto;
-}
-
-#title-bottom-container {
-  font-size: 1px;
-  top: 50%;
-  bottom: 30%;
-  position: relative;
-}
 </style>
