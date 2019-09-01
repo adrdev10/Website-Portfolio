@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view v-bind:data="gitData"></router-view>
   </div>
 </template>
 
@@ -9,7 +9,25 @@ import ProjectBox from "./components/ProjectBox.vue";
 import ContactBox from "./components/ContactBox";
 export default {
   data() {
-    return {};
+    return {
+      gitData: []
+    };
+  },
+  mounted: function() {
+    fetch("https://api.github.com/users/xdragon1015/repos", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      method: "get"
+    })
+      .then(resp => {
+        return resp.json();
+      })
+      .then(dJson => {
+        this.gitData = dJson;
+        console.log(this.gitData);
+      });
   },
   name: "app",
   components: {
@@ -24,6 +42,7 @@ html,
 body {
   width: 100%;
 }
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -38,6 +57,4 @@ body {
   background-color: black;
   color: #fff;
 }
-
-
 </style>
