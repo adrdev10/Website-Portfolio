@@ -18,26 +18,12 @@ export default {
       names: ["Software Developer", "Content Creator", "Golang Language User"],
       counter: 0,
       currentName: "",
-      data: []
     };
   },
   methods: {
-    startApp() {
-      this.$router.replace({ path: "/projects" });
-      console.log(this.$router.history.current);
-      if (this.$router.history.current.path === "/projects") {
-        this.currentPath = "/projects";
-        this.show = false;
-      } else {
-        this.currentPath = "/";
-        this.show = true;
+      startApp() {
+          this.$router.push('/projects')
       }
-    }
-  },
-  mounted: function() {
-    fetch("application/vnd.github.inertia-preview+json").then(resp => {
-      console.log(resp);
-    });
   },
   created: function() {
     setInterval(
@@ -48,7 +34,8 @@ export default {
       }.bind(this),
       3000
     );
-  }
+  },
+
 };
 </script>
 
@@ -60,9 +47,9 @@ p {
 }
 
 #main-content {
-  top: 30%;
-  border: 1px solid white;
+  top: 25%;
   bottom: 50%;
+  height: 50%;
   position: relative;
 }
 
@@ -81,10 +68,8 @@ p {
 
 #title-bottom-container {
   font-size: 1px;
-  top: 150%;
-  bottom: 160%;
-
-  border: 1px solid white;
+  top: 50%;
+  bottom: 60%;
   position: relative;
 }
 </style>
