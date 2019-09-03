@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view v-bind:data="gitData"></router-view>
+    <transition name="fade">
+      <router-view v-bind:data="gitData"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -25,9 +27,16 @@ export default {
         return resp.json();
       })
       .then(dJson => {
-        this.gitData = dJson;
-        console.log(this.gitData);
-      });
+        let filteredJson = dJson.filter((item) => {
+          if(item.owner.login === "xdragon1015" && item.stargazers_count > 0) {
+            return item;
+          }
+        })
+        console.log(filteredJson);
+        this.gitData = filteredJson;
+      }).catch(error => {
+        console.log("error: " + error);
+      }) 
   },
   name: "app",
   components: {
@@ -38,9 +47,13 @@ export default {
 </script>
 
 <style>
-html,
-body {
-  width: 100%;
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s ease;
+  transition-delay: .10s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 #app {
@@ -48,12 +61,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
-  background: rgba(51, 51, 51, 0.7);
   background-color: black;
   color: #fff;
 }
