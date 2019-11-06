@@ -23,7 +23,7 @@
 export default {
   data() {
     return {
-      names: ["Software Engineer", "Content Creator", "Coder for Life"],
+      names: ["Creator", "Innovator", "Software Engineer"],
       counter: 0,
       currentName: ""
     };
